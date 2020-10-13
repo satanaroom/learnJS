@@ -38,6 +38,9 @@ let weekDays = [
   [mondayRu, tuesdayRu, wednesdayRu, thursdayRu, fridayRu, saturdayRu, sundayRu]
 ];
 
-lang === 'ru' ? console.log(weekDays[0][0]) : console.log(weekDays[1][0]);
+lang === 'ru' ? console.log(String(weekDays[1])) : console.log(String(weekDays[0]));
 
-let namePerson;
+var namePerson = prompt('Введите имя члена команды академии или её участника');
+
+namePerson === 'Артем' ? console.log('Директор') : namePerson === 'Максим' ? console.log('Преподаватель') : console.log('Студент');
+
