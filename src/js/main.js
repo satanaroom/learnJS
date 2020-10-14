@@ -1,6 +1,6 @@
 'use strict';
 
-const getOneArg = function(oneArg, callback) {
+const getOneArg = function(oneArg) {
   if (isNaN(oneArg)) {
     return oneArg.substr(0, 30) + '...';
   }else {
