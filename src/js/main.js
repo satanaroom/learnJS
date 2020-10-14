@@ -15,14 +15,12 @@ let arr2 = [];
 for (let i = 1; i <= 100; i++){
   arr2.push(i);
 }
-let arr3 = arr2.filter(function(n){
+arr2.filter(function(n){
   if (n !== 1 && (n === 2 || n % 2 !== 0) && (n === 3 || n % 3 !== 0) && (n === 5 || n % 5 !== 0) && (n === 7 || n % 7 !== 0) && (n === 9 || n % 9 !== 0)) {
-    return n;
+    console.log(n + ' - делители этого числа: 1 и ' + n);
   } 
 });
 
-for (let i = 0; arr3.length; i++) {
-  console.log(arr3[i] + ' - делители этого числа: 1 и ' + arr2[i]);
-}
+
 
 
