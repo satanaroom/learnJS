@@ -33,18 +33,17 @@ let expenses = [];
 console.log(addExpenses.toLowerCase().split(', '));
 
 let getExpensesMonth = function() {
-  let sum = 0,
-      i = 0;
-
-    do {
+  let sum = 0;
+  let sum2;
+    for (let i = 0; i < 2; i++) {
     expenses[i] = prompt('Введите обязательную статью расходов');
     do {
-      sum += +prompt('Во сколько это обойдется?');
+      sum2 = prompt('Во сколько это обойдется?');
     }
-    while (!isNumber(sum));
-    i++;
-  } while (i < 3);
-  return Number(sum);
+    while (!isNumber(sum2));
+    sum += Number(sum2);
+  } 
+  return sum;
 };
 
 let expensesAmount = getExpensesMonth();
@@ -77,7 +76,7 @@ let getTargetMonth = function() {
   return Math.ceil(mission / accumulatedMonth);
 };
 
-if (getTargetMonth >= 0) {
+if (getTargetMonth() >= 0) {
   console.log('Цель будет достигнута за: ' + getTargetMonth() + ' месяца');
 } else {
   console.log('Цель не будет достигнута');
