@@ -60,16 +60,17 @@ let budgetDay = accumulatedMonth / 30;
 console.log('Бюджет на день: ' + budgetDay);
 
 let getStatusIncome = function() {
-  if (budgetDay >= 1200){
+  if (budgetDay >= 1200) {
     return ('У Вас высокий уровень дохода');
-  }else if (600 > budgetDay > 1200, budgetDay === 600){
+  }else if (600 > budgetDay > 1200 || budgetDay === 600) {
     return ('У Вас средний уровень дохода');
-  }else if (0 > budgetDay > 600, budgetDay === 0){
+  }else if (0 > budgetDay > 600 || budgetDay === 0) {
     return ('К сожалению, у Вас уровень дохода ниже среднего');
-  }else if (budgetDay < 0){
+  }else if (budgetDay < 0) {
     return ('Что-то пошло не так');
   }
 };
+
 console.log(getStatusIncome());
 
 let getTargetMonth = function() {
