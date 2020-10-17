@@ -5,20 +5,20 @@ let isNumber = function(n) {
 };
 
 let money,
-    income = "freelance",
+    start = function() {
+      do {
+        money = prompt('Ваш месячный доход?');
+      }
+      while (!isNumber(money));
+    };
+
+  start();
+
+let income = "freelance",
     addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
     deposit = confirm('Есть ли у Вас депозит в банке?'),
     mission = 150000,
     period = 6;
-
-let start = function() {
-  do {
-    money = prompt('Ваш месячный доход?');
-  }
-  while (!isNumber(money));
-};
-
-start();
 
 let showTypeOf = function(data) {
   console.log(data, typeof(data));
@@ -62,9 +62,9 @@ console.log('Бюджет на день: ' + budgetDay);
 let getStatusIncome = function() {
   if (budgetDay >= 1200) {
     return ('У Вас высокий уровень дохода');
-  }else if (600 > budgetDay > 1200 || budgetDay === 600) {
+  }else if (budgetDay > 600 || budgetDay === 600) {
     return ('У Вас средний уровень дохода');
-  }else if (0 > budgetDay > 600 || budgetDay === 0) {
+  }else if (budgetDay > 0 || budgetDay === 0) {
     return ('К сожалению, у Вас уровень дохода ниже среднего');
   }else if (budgetDay < 0) {
     return ('Что-то пошло не так');
