@@ -10,75 +10,85 @@ let money,
         money = prompt('Ваш месячный доход?');
       }
       while (!isNumber(money));
+      return +money;
     };
 
-  start();
+let appData = {
+    income: {},
+    addIncome: [],
+    expenses: {},
+    addExpenses: [],
+    deposit: false,
+    mission: 50000,
+    period: 3,
+    budget: start(),
+    budgetDay: 0,
+    budgetMonth: 0,
+    expensesMonth: 0,
+    asking: function() {
+      let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+          appData.addExpenses = addExpenses.toLowerCase().split(', ');
+          appData.deposit = confirm('Есть ли у Вас депозит в банке?');
+      let number = 0;
+      let exp = [];
+          for(let i = 0; i < 2; i++) {
+            exp[i] = prompt('Введите обязательную статью расходов?');
 
-let income = "freelance",
-    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
-    deposit = confirm('Есть ли у Вас депозит в банке?'),
-    mission = 150000,
-    period = 6;
+            do {
+              number = prompt('Во сколько это обойдется?');
+            }
+            while(!isNumber(number));
+            appData.expenses[exp[i]] = number;
+        }
+    },
+          
+    getExpensesMonth: function() {
+      let sum = 0;
+      for (let key in appData.expenses) {
+        sum += +appData.expenses[key];
+      }
+      return (appData.expensesMonth = sum);
+    },
 
-let showTypeOf = function(data) {
-  console.log(data, typeof(data));
+    getBudget: function() {
+      appData.budgetMonth = appData.budget - appData.expensesMonth;
+      appData.budgetDay = Math.floor(appData.budgetMonth / 30);
+    },
+
+    getTargetMonth: function() {
+      return Math.ceil(appData.mission / appData.budgetMonth);
+    },
+
+    getStatusIncome: function() {
+      if (appData.budgetDay >= 1200) {
+        return ('У Вас высокий уровень дохода');
+      }else if (appData.budgetDay > 600 || appData.budgetDay === 600) {
+        return ('У Вас средний уровень дохода');
+      }else if (appData.budgetDay > 0 || appData.budgetDay === 0) {
+        return ('К сожалению, у Вас уровень дохода ниже среднего');
+      }else if (appData.budgetDay < 0) {
+        return ('Что-то пошло не так');
+      }
+    },
+
 };
 
-showTypeOf(money);
-showTypeOf(income);
-showTypeOf(deposit);
+appData.asking();
 
-let expenses = [];
+console.log('Расходы за месяц: ' + appData.getExpensesMonth());
 
-console.log(addExpenses.toLowerCase().split(', '));
+appData.getBudget();
 
-let getExpensesMonth = function() {
-  let sum = 0;
-  let sum2;
-    for (let i = 0; i < 2; i++) {
-    expenses[i] = prompt('Введите обязательную статью расходов');
-    do {
-      sum2 = prompt('Во сколько это обойдется?');
-    }
-    while (!isNumber(sum2));
-    sum += Number(sum2);
-  } 
-  return sum;
-};
-
-let expensesAmount = getExpensesMonth();
-
-console.log('Расходы за месяц: ' + expensesAmount);
-
-let getAccumulatedMonth = function() {
-  return money - expensesAmount;
-};
-
-let accumulatedMonth = getAccumulatedMonth();
-
-let budgetDay = accumulatedMonth / 30;
-console.log('Бюджет на день: ' + budgetDay);
-
-let getStatusIncome = function() {
-  if (budgetDay >= 1200) {
-    return ('У Вас высокий уровень дохода');
-  }else if (budgetDay > 600 || budgetDay === 600) {
-    return ('У Вас средний уровень дохода');
-  }else if (budgetDay > 0 || budgetDay === 0) {
-    return ('К сожалению, у Вас уровень дохода ниже среднего');
-  }else if (budgetDay < 0) {
-    return ('Что-то пошло не так');
-  }
-};
-
-console.log(getStatusIncome());
-
-let getTargetMonth = function() {
-  return Math.ceil(mission / accumulatedMonth);
-};
-
-if (getTargetMonth() >= 0) {
-  console.log('Цель будет достигнута за: ' + getTargetMonth() + ' месяца');
+if (appData.getTargetMonth() >= 0) {
+  console.log('Цель будет достигнута за: ' + appData.getTargetMonth() + ' месяца');
 } else {
   console.log('Цель не будет достигнута');
+}
+
+console.log(appData.getStatusIncome());
+
+console.log('Наша программа включает в себя данные: ');
+
+for (let prop in appData) {
+  console.log(prop + ': ' + appData[prop]);
 }
