@@ -137,7 +137,7 @@ for (let prop in appData) {
   console.log(prop + ': ' + appData[prop]);
 }
 
-let getToUpperCaseAddExpenses = function(array) {
+let getToUpperCaseAnyArray = function(array) {
   let arr = [];
   for (let i = 0; i < array.length; i++) {
     arr.push(array[i].charAt(0).toUpperCase() + array[i].substring(1)); 
@@ -145,5 +145,5 @@ let getToUpperCaseAddExpenses = function(array) {
   return arr.join(', ');
 };
 
-console.log(getToUpperCaseAddExpenses(appData.addExpenses));
+console.log(getToUpperCaseAnyArray(appData.addExpenses));
 
