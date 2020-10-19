@@ -55,8 +55,10 @@ let appData = {
       let number = 0;
       let exp = [];
           for(let i = 0; i < 2; i++) {
+            do {
             exp[i] = prompt('Введите обязательную статью расходов?');
-
+            }
+            while(!isNaN(exp[i]));
             do {
               number = prompt('Во сколько это обойдется?');
             }
