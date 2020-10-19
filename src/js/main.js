@@ -19,6 +19,8 @@ let appData = {
     expenses: {},
     addExpenses: [],
     deposit: false,
+    percentDeposit: 0,
+    moneyDeposit: 0,
     mission: 50000,
     period: 3,
     budget: start(),
@@ -26,7 +28,28 @@ let appData = {
     budgetMonth: 0,
     expensesMonth: 0,
     asking: function() {
-      let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+
+      if (confirm('Есть ли у Вас дополнительный источник заработка?')) {
+        let itemIncome; 
+        let cashIncome;
+        do {
+          itemIncome = prompt('Какой у Вас есть дополнительный заработок?', 'Taxi');
+        }
+        while (!isNaN(itemIncome));
+
+        do {
+          cashIncome = prompt('Сколько в месяц Вы зарабатываете на этом?');
+        }
+        while (!isNumber(cashIncome));
+        appData.income[itemIncome] = cashIncome;
+      }
+
+      let addExpenses; 
+        do {
+          addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+        }
+        while (!isNaN(addExpenses));
+
           appData.addExpenses = addExpenses.toLowerCase().split(', ');
           appData.deposit = confirm('Есть ли у Вас депозит в банке?');
       let number = 0;
@@ -71,11 +94,32 @@ let appData = {
       }
     },
 
+    getInfoDeposit: function() {
+      if (appData.deposit) {
+        do {
+          appData.percentDeposit = prompt('Какой годовой процент?', 10);
+          
+        }
+        while (!isNumber(appData.percentDeposit));
+      } 
+      do {
+          appData.moneyDeposit = prompt('Какая сумма заложена?', 10000);
+          
+        }
+        while (!isNumber(appData.moneyDeposit));
+    },
+
+    calcSaveMoney: function() {
+      return appData.budgetMonth * appData.period;
+    },
+
 };
 
 appData.asking();
 
 console.log('Расходы за месяц: ' + appData.getExpensesMonth());
+
+appData.getInfoDeposit();
 
 appData.getBudget();
 
@@ -92,3 +136,14 @@ console.log('Наша программа включает в себя данны
 for (let prop in appData) {
   console.log(prop + ': ' + appData[prop]);
 }
+
+let getToUpperCaseAddExpenses = function(array) {
+  let arr = [];
+  for (let i = 0; i < array.length; i++) {
+    arr.push(array[i].charAt(0).toUpperCase() + array[i].substring(1)); 
+  }
+  return arr.join(', ');
+};
+
+console.log(getToUpperCaseAddExpenses(appData.addExpenses));
+
