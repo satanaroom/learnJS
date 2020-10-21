@@ -1,8 +1,8 @@
 'use strict';
 
-let calculation = document.getElementById('start');
-let buttonPlus1 = document.getElementsByTagName('button')[0];
-let buttonPlus2 = document.getElementsByTagName('button')[1];
+const calculation = document.getElementById('start');
+const buttonPlus1 = document.getElementsByTagName('button')[0];
+const buttonPlus2 = document.getElementsByTagName('button')[1];
 let checkbox = document.querySelector('#deposit-check');
 let additionalIncome = document.querySelectorAll('.additional_income-item');
 let budgetMonthValue = document.getElementsByClassName('budget_month-value');
