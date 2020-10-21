@@ -29,7 +29,7 @@ a:active {
 
 body {
   position: relative;
-  background-image: url(./image/open_book.jpg);
+  background-image: url(/src/image/you-dont-know-js.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -51,7 +51,7 @@ h1, h2 {
 }
 
 h2>a{
-  color: darkkhaki;
+  color: #bdb76b;
 }
 
 .book {
