@@ -6,10 +6,15 @@ const todoControl = document.querySelector('.todo-control'),
   todoCompleted = document.querySelector('.todo-completed'),
   headerButton = document.querySelector('.header-button');
 
-const todoData = [];
+let todoData = [];
+
+let todoDataLocal = JSON.parse(localStorage.getItem("todoData"));
+
+if(todoDataLocal !== null) {
+  todoData = todoDataLocal;
+}
 
 const render = function(){
-
   headerButton.setAttribute('disabled', 'disabled');
   headerInput.addEventListener('input', function() {
     if(headerInput.value !== '') {
@@ -40,7 +45,6 @@ const render = function(){
     btnTodoRemove.addEventListener('click', function() {
       const removedLi =  li.remove();
       todoData.splice(todoData.indexOf(removedLi), 1);
-  
     });
 
     const btnTodoComplete = li.querySelector('.todo-complete');
@@ -50,23 +54,21 @@ const render = function(){
     });
   });
 
-  
-};
+  localStorage.setItem("todoData", JSON.stringify(todoData));
 
+};
 
 todoControl.addEventListener('submit', function(event) {
   event.preventDefault();
-  
   const newTodo = {
       value: headerInput.value,
       completed: false
   };
-
   todoData.push(newTodo);
-
   render();
-
   headerInput.value = '';
 });
 
 render();
+
+//localStorage.getItem(JSON.parse('ToDo'));
