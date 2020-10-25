@@ -43,8 +43,9 @@ const render = function(){
 
     const btnTodoRemove = li.querySelector('.todo-remove');
     btnTodoRemove.addEventListener('click', function() {
-      const removedLi =  li.remove();
-      todoData.splice(todoData.indexOf(removedLi), 1);
+      
+      todoData.splice(todoData.indexOf(item), 1);
+      render();
     });
 
     const btnTodoComplete = li.querySelector('.todo-complete');
