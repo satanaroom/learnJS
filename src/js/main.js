@@ -129,7 +129,7 @@ let appData = {
         }
       });
     },  
-    getExpensesMonth: () => {                                                 //Стрелочная функция (для this)
+    getExpensesMonth: function() {                                                 //Стрелочная функция (для this)
       for (let key in this.expenses) {
         this.expensesMonth += +this.expenses[key];
       }
@@ -187,23 +187,15 @@ let appData = {
     reset: function(){
       document.querySelectorAll('.data input[type=text]').forEach(function(item){
         item.disabled = false;
-        document.querySelector('[type="text"]').value = '';
+        item.value = '';
       });
+      
       start.style.display = 'block';
       cancel.style.display = 'none';
+
       document.querySelectorAll('.result input[type=text]').forEach(function(item) {
         item.disabled = false;
-        document.querySelector('[type="text"]').value = '';
-      });
-      budgetMonthValue.value = '';     
-      budgetDayValue.value = '';        
-      expensesMonthValue.value = '';
-      additionalExpensesValue.value = '';
-      additionalIncomeValue.value = '';   
-      targetMonthValue.value = '';   
-      incomePeriodValue.value = '';     
-      periodSelect.addEventListener('input', function(){
-        incomePeriodValue.value = '';
+        item.value = '';
       });
     },
     check: function(){
