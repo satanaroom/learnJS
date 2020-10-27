@@ -55,16 +55,16 @@ let appData = {
     expensesMonth: 0,
     
     start: function() {
-      appData.budget = +salaryAmount.value;
-      appData.getIncome();
-      appData.getIncomeMonth();
-      appData.getExpenses();
-      appData.getExpensesMonth();
-      appData.getAddExpenses();
-      appData.getAddIncome();
-      appData.getBudget();
-      appData.showResult();
-      appData.blocked();
+      this.budget = +salaryAmount.value;
+      this.getExpenses();
+      this.getExpensesMonth();
+      this.getIncome();
+      this.getIncomeMonth();
+      this.getAddExpenses();
+      this.getAddIncome();
+      this.getBudget();
+      this.showResult();
+      this.blocked();
     },
     showResult: function() {
       budgetMonthValue.value = this.budgetMonth;                                                //this
@@ -72,10 +72,10 @@ let appData = {
       expensesMonthValue.value = this.expensesMonth;                                            //this
       additionalExpensesValue.value = this.addExpenses.join(', ');                              //this
       additionalIncomeValue.value = this.addIncome.join(', ');                                  //this
-      targetMonthValue.value = appData.getTargetMonth();
-      incomePeriodValue.value = appData.calcPeriod();
-      periodSelect.addEventListener('input', function(){
-      incomePeriodValue.value = appData.calcPeriod();
+      targetMonthValue.value = this.getTargetMonth();
+      incomePeriodValue.value = this.calcPeriod();
+      periodSelect.addEventListener('input', () => {
+      incomePeriodValue.value = this.calcPeriod();
       });
     },
     addExpensesBlock: function() {
@@ -101,7 +101,7 @@ let appData = {
         if(itemExpenses !== '' && cashExpenses !== ''){
           this.expenses[itemExpenses] = cashExpenses;
         }
-      });
+      }, this);
     },
     getIncome: function() {
       incomeItems.forEach(item => {                                            //Стрелочная функция (для this)
@@ -129,19 +129,19 @@ let appData = {
         }
       });
     },  
-    getExpensesMonth: function() {                                                 //Стрелочная функция (для this)
+    getExpensesMonth: function() {
       for (let key in this.expenses) {
         this.expensesMonth += +this.expenses[key];
       }
     },
-    getIncomeMonth: () => {                                                   //Стрелочная функция (для this)
+    getIncomeMonth: function() {
       for (let key in this.income) {
-        this.expensesMonth += +this.income[key];
+        this.incomeMonth += +this.income[key];
       }
     },
     getBudget: function () {
       appData.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;    //this
-      appData.budgetDay = Math.floor(this.budgetMonth / 30);
+      appData.budgetDay = Math.floor(appData.budgetMonth / 30);
     },
     getTargetMonth: function() {
       return Math.ceil(targetAmount.value / this.budgetMonth);                      //this
@@ -210,10 +210,7 @@ let appData = {
     }
 };
 
-let foo = appData.start.bind(appData);
-console.log(foo);
-
-start.addEventListener('click', appData.start);
+start.addEventListener('click', appData.start.bind(appData));
 
 start.addEventListener('click', appData.check);
 
