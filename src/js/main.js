@@ -228,9 +228,11 @@ AppData.prototype.reset = function(){
   cancel.style.display = 'none';
   for (let i = 1; i < incomeItems.length; i++) {
     incomeItems[i].remove();
+    incomePlus.style.display = 'block';
   }
   for (let i = 1; i < expensesItems.length; i++) {
     expensesItems[i].remove();
+    expensesPlus.style.display = 'block';
   }
 };
 
