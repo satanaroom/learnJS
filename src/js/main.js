@@ -25,7 +25,7 @@ class DomElement {
     newDiv.textContent = this.cssText;
 
     if(this.selector[0] === '.'){
-      newDiv.classList.add();
+      newDiv.classList.add(this.selector.substring(1));
     }
     newDiv.textContent = "DIV создан!";
   }
@@ -37,15 +37,15 @@ class DomElement {
     newP.style.cssText = this.cssText;
     newP.textContent = this.cssText;
 
-    if(this.selector[0] === '.'){
-      newP.classList.add(this.selector);
+    if(this.selector[0] === '#'){
+      newP.id = this.selector.substring(1);
     }
     newP.textContent = "Параграф создан!";
   }
 }
 
 let newDiv = new DomElement('.block', 300, 300, 'red', 44);
-let newP = new DomElement('.best', 120, 200, 'blue', 12);
+let newP = new DomElement('#best', 120, 200, 'blue', 12);
 
 inputText.addEventListener('input', function() {
   if(inputText.value === '.') {
