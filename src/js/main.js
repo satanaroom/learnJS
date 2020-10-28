@@ -208,17 +208,16 @@ class AppData {
       expensesPlus.style.display = 'block';
     }
   }
+  eventListeners() {
+    start.addEventListener('click', this.start.bind(this));
+    start.addEventListener('click', this.check);
+    expensesPlus.addEventListener('click', this.addExpensesBlock);
+    incomePlus.addEventListener('click', this.addIncomeBlock);
+    periodSelect.addEventListener('input', this.changeAmount);
+    cancel.addEventListener('click', this.reset);
+  }
 }
 
 const appData = new AppData();
-
-AppData.prototype.eventListeners = function() {
-  start.addEventListener('click', appData.start.bind(appData));
-  start.addEventListener('click', appData.check);
-  expensesPlus.addEventListener('click', appData.addExpensesBlock);
-  incomePlus.addEventListener('click', appData.addIncomeBlock);
-  periodSelect.addEventListener('input', appData.changeAmount);
-  cancel.addEventListener('click', appData.reset);
-};
 
 appData.eventListeners();
