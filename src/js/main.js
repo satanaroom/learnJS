@@ -80,11 +80,11 @@ AppData.prototype.start = function() {
 };
 
 AppData.prototype.showResult = function() {
-  budgetMonthValue.value = this.budgetMonth;                                                //this
-  budgetDayValue.value = this.budgetDay;                                                    //this
-  expensesMonthValue.value = this.expensesMonth;                                            //this
-  additionalExpensesValue.value = this.addExpenses.join(', ');                              //this
-  additionalIncomeValue.value = this.addIncome.join(', ');                                  //this
+  budgetMonthValue.value = this.budgetMonth;
+  budgetDayValue.value = this.budgetDay;
+  expensesMonthValue.value = this.expensesMonth;
+  additionalExpensesValue.value = this.addExpenses.join(', ');
+  additionalIncomeValue.value = this.addIncome.join(', ');
   targetMonthValue.value = this.getTargetMonth();
   incomePeriodValue.value = this.calcPeriod();
   periodSelect.addEventListener('input', () => {
@@ -110,7 +110,7 @@ AppData.prototype.addIncomeBlock = function() {
   }
 };
 
-AppData.prototype.getExpenses = function(){                                                  //Стрелочная функция (для this)
+AppData.prototype.getExpenses = function(){
   expensesItems.forEach(item => {
     let itemExpenses = item.querySelector('.expenses-title').value;
     let cashExpenses = item.querySelector('.expenses-amount').value;
@@ -121,7 +121,7 @@ AppData.prototype.getExpenses = function(){                                     
 };
 
 AppData.prototype.getIncome = function() {
-  incomeItems.forEach(item => {                                            //Стрелочная функция (для this)
+  incomeItems.forEach(item => {
     let itemIncome = item.querySelector('.income-title').value;
     let cashIncome = item.querySelector('.income-amount').value;
     if(itemIncome !== '' && cashIncome !== ''){
@@ -130,7 +130,7 @@ AppData.prototype.getIncome = function() {
   });
 };
 
-AppData.prototype.getAddExpenses = function() {                                               //Стрелочная функция (для this)
+AppData.prototype.getAddExpenses = function() {
   let addExpenses = additionalExpensesItem.value.split(',');
   addExpenses.forEach(item => {
     item = item.trim();
@@ -141,7 +141,7 @@ AppData.prototype.getAddExpenses = function() {                                 
 };
 
 AppData.prototype.getAddIncome = function() {
-  additionalIncomeItem.forEach(item => {                                  //Стрелочная функция (для this)
+  additionalIncomeItem.forEach(item => {
     let itemValue = item.value.trim();
     if(itemValue !== ''){
       this.addIncome.push(itemValue);
@@ -162,12 +162,12 @@ AppData.prototype.getIncomeMonth = function() {
 };
 
 AppData.prototype.getBudget = function () {
-  this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;    //this
+  this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth;
   this.budgetDay = Math.floor(this.budgetMonth / 30);
 };
 
 AppData.prototype.getTargetMonth = function() {
-  return Math.ceil(targetAmount.value / this.budgetMonth);                      //this
+  return Math.ceil(targetAmount.value / this.budgetMonth);
 };
 
 AppData.prototype.getStatusIncome = function() {
@@ -198,7 +198,7 @@ AppData.prototype.getInfoDeposit = function() {
 };
 
 AppData.prototype.calcPeriod = function() {
-  return this.budgetMonth * periodSelect.value;                           //this
+  return this.budgetMonth * periodSelect.value;
 };
 
 AppData.prototype.changeAmount = function() {
@@ -246,23 +246,3 @@ AppData.prototype.eventListeners = function() {
 };
 
 appData.eventListeners();
-
-
-
-
-
-
-
-// start.addEventListener('click', appData.start.bind(appData));
-// start.addEventListener('click', appData.check);
-// expensesPlus.addEventListener('click', appData.addExpensesBlock);
-// periodSelect.addEventListener('input', appData.changeAmount);
-// incomePlus.addEventListener('click', appData.addIncomeBlock);
-// cancel.addEventListener('click', appData.reset);
-
-
-
-
-
-
-
