@@ -36,9 +36,11 @@ window.addEventListener('DOMContentLoaded', () => {
                 timerHours.textContent = '00';
                 timerMinutes.textContent = '00';
                 timerSeconds.textContent = '00';
+                clearInterval(updateClock);
             }
         }
         updateClock();
     }
-    countTimer('04 november 2020');
+    countTimer('01 november 2020');
+    
 });
