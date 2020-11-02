@@ -6,15 +6,18 @@ let date = new Date(),
   timeToNewYear = new Date('31 december 2020'),
   morningDayTime = 'Доброе ',
   dayAndEveningDayTime = 'Добрый ',
+  nightDayTime = 'Доброй ',
   newYearTime = Math.floor((timeToNewYear - date) / 1000 / 86400);
 
 
-if (dayTime >= 0 && dayTime < 12) {
+if (dayTime >= 5 && dayTime < 12) {
   dayTime = 'утро';
-} else if (dayTime >= 12 && dayTime < 17) {
+} else if (dayTime >= 12 && dayTime < 18) {
   dayTime = 'день';
-} else if (dayTime >= 17 && dayTime < 24) {
+} else if (dayTime >= 18 && dayTime < 25) {
   dayTime = 'вечер';
+} else if (dayTime > 0 && dayTime < 5) {
+  dayTime = 'ночи';
 }
 
 if (day === 0) {
@@ -40,6 +43,11 @@ if (dayTime === 'утро') {
 До нового года осталось: ${newYearTime} дней`);
 } else if (dayTime === 'вечер' || dayTime === 'день') {
   console.log(`${dayAndEveningDayTime}${dayTime}
+Сегодня: ${day}
+Текущее время: ${date.toTimeString()}
+До нового года осталось: ${newYearTime} дней`);
+} else if (dayTime === 'ночи') {
+  console.log(`${nightDayTime}${dayTime}
 Сегодня: ${day}
 Текущее время: ${date.toTimeString()}
 До нового года осталось: ${newYearTime} дней`);
