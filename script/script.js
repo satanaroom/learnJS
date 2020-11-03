@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
-
     //Timer
     function countTimer(deadline) {
         const timerHours = document.querySelector('#timer-hours'),
@@ -27,20 +26,20 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         function updateClock() {
             const timer = getTimeRemaining();
+            let idInterval;
             timerHours.textContent = timer.hours;
             timerMinutes.textContent = timer.minutes;
             timerSeconds.textContent = timer.seconds;
             if (timer.timeRemaining > 0) {
-                setInterval(updateClock, 1000);
+                idInterval = setInterval(updateClock, 1000);
             } else {
                 timerHours.textContent = '00';
                 timerMinutes.textContent = '00';
                 timerSeconds.textContent = '00';
-                clearInterval(updateClock);
+                clearInterval(idInterval);
             }
         }
         updateClock();
     }
-    countTimer('01 november 2020');
-    
+    countTimer('04 november 2020');
 });
