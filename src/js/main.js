@@ -7,7 +7,11 @@ let date = new Date(),
   morningDayTime = 'Доброе ',
   dayAndEveningDayTime = 'Добрый ',
   nightDayTime = 'Доброй ',
-  newYearTime = Math.floor((timeToNewYear - date) / 1000 / 86400);
+  newYearTime = Math.floor((timeToNewYear - date) / 1000 / 86400),
+  firstStroke = document.querySelector('.first-stroke'),
+  secondStroke = document.querySelector('.second-stroke'),
+  thirdStroke = document.querySelector('.third-stroke'),
+  fourthStroke = document.querySelector('.fourth-stroke');
 
 
 if (dayTime >= 5 && dayTime < 12) {
@@ -37,19 +41,19 @@ if (day === 0) {
 }
 
 if (dayTime === 'утро') {
-  console.log(`${morningDayTime}${dayTime}
-Сегодня: ${day}
-Текущее время: ${date.toTimeString()}
-До нового года осталось: ${newYearTime} дней`);
+firstStroke.textContent = `${morningDayTime}${dayTime}`;
+secondStroke.textContent = `Сегодня: ${day}`;
+thirdStroke.textContent = `Текущее время: ${date.toTimeString().replace(/ .*/, '')}`;
+fourthStroke.textContent = `До нового года осталось: ${newYearTime} дней`;
 } else if (dayTime === 'вечер' || dayTime === 'день') {
-  console.log(`${dayAndEveningDayTime}${dayTime}
-Сегодня: ${day}
-Текущее время: ${date.toTimeString()}
-До нового года осталось: ${newYearTime} дней`);
+firstStroke.textContent = `${dayAndEveningDayTime}${dayTime}`;
+secondStroke.textContent = `Сегодня: ${day}`;
+thirdStroke.textContent = `Текущее время: ${date.toTimeString().replace(/ .*/, '')}`;
+fourthStroke.textContent = `До нового года осталось: ${newYearTime} дней`;
 } else if (dayTime === 'ночи') {
-  console.log(`${nightDayTime}${dayTime}
-Сегодня: ${day}
-Текущее время: ${date.toTimeString()}
-До нового года осталось: ${newYearTime} дней`);
+firstStroke.textContent = `${nightDayTime}${dayTime}`;
+secondStroke.textContent = `Сегодня: ${day}`;
+thirdStroke.textContent = `Текущее время: ${date.toTimeString().replace(/ .*/, '')}`;
+fourthStroke.textContent = `До нового года осталось: ${newYearTime} дней`;
 }
 
