@@ -75,7 +75,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         }
                     }, 20);
                 } else {
-                    popup.style.display = "none";
+                    popup.style.display = "block";
                 }
             });
         });
