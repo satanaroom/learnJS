@@ -65,27 +65,27 @@ window.addEventListener('DOMContentLoaded', () => {
             elem.addEventListener('click', () => {
                 if (window.innerWidth > 768) {
                     popup.style.display = "block";
-                    popupContent.style.left = "-10%";
-                    let x = -10;
+                    popupContent.style.opacity = "0";
+                    let x = 0;
                     const timer = setInterval(() => {
-                        x += 1;
-                        popupContent.style.left = `${x}%`;
-                        if (popupContent.style.left === "38%") {
+                        x += 0.1;
+                        popupContent.style.opacity = `${x}`;
+                        if (popupContent.style.opacity === "1.1") {
                             clearInterval(timer);
                         }
-                    }, 5);
+                    }, 20);
                 } else {
-                    popup.style.display = "block";
+                    popup.style.display = "none";
                 }
             });
         });
         popupClose.addEventListener('click', () => {
             if (window.innerWidth > 768) {
-                let x = 38;
+                let x = 1;
                 const timer = setInterval(() => {
-                    x += 1;
-                    popupContent.style.left = `${x}%`;
-                    if (popupContent.style.left === "100%") {
+                    x -= 0.1;
+                    popupContent.style.opacity = `${x}`;
+                    if (popupContent.style.opacity === "-0.1") {
                         clearInterval(timer);
                         popup.style.display = "none";
                     }
