@@ -48,16 +48,15 @@ window.addEventListener('DOMContentLoaded', () => {
         const handlerMenu = () => {
             menu.classList.toggle('active-menu');
         };
-        // btnMenu.addEventListener('click', handlerMenu);
-        // closeBtn.addEventListener('click', handlerMenu);
-        // menuItems.forEach(elem => elem.addEventListener('click', handlerMenu));
         body.addEventListener('click', event => {
-            const target = event.target;
-            if (target.classList.contains('menu')) {
+            let target1 = event.target;
+            const target2 = event.target;
+            target1 = target1.closest('.menu');
+            if (target1) {
                 handlerMenu();
-            } else if (target.classList.contains('close-btn')) {
+            } else if (target2.classList.contains('close-btn')) {
                 handlerMenu();
-            } else if (target.matches('ul>li>a')) {
+            } else if (target2.matches('ul>li>a')) {
                 handlerMenu();
             }
         });
