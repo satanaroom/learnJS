@@ -42,17 +42,25 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //Menu
     const toggleMenu = () => {
-        const btnMenu = document.querySelector('.menu'),
-            menu = document.querySelector('menu'),
-            closeBtn = document.querySelector('.close-btn'),
-            menuItems = menu.querySelectorAll('ul>li>a');
+        const menu = document.querySelector('menu'),
+            body = document.querySelector('body');
 
         const handlerMenu = () => {
             menu.classList.toggle('active-menu');
         };
-        btnMenu.addEventListener('click', handlerMenu);
-        closeBtn.addEventListener('click', handlerMenu);
-        menuItems.forEach(elem => elem.addEventListener('click', handlerMenu));
+        // btnMenu.addEventListener('click', handlerMenu);
+        // closeBtn.addEventListener('click', handlerMenu);
+        // menuItems.forEach(elem => elem.addEventListener('click', handlerMenu));
+        body.addEventListener('click', event => {
+            const target = event.target;
+            if (target.classList.contains('menu')) {
+                handlerMenu();
+            } else if (target.classList.contains('close-btn')) {
+                handlerMenu();
+            } else if (target.matches('ul>li>a')) {
+                handlerMenu();
+            }
+        });
     };
     toggleMenu();
     //popup
