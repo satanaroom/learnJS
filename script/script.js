@@ -213,7 +213,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 startSlider();
             }
         });
-        startSlider(2000);
+        startSlider(1500);
     };
     slider();
 });
