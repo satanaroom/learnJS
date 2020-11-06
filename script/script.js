@@ -36,6 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 clearInterval(updateClock);
             }
         };
+        updateClock();
         setInterval(updateClock, 1000);
     }
     countTimer('10 november 2020');
@@ -146,11 +147,19 @@ window.addEventListener('DOMContentLoaded', () => {
     //Slider
     const slider = () => {
         const slide = document.querySelectorAll('.portfolio-item'),
-            btn = document.querySelectorAll('.portfolio-btn'),
-            dot = document.querySelectorAll('.dot'),
-            slider = document.querySelector('.portfolio-content');
+            slider = document.querySelector('.portfolio-content'),
+            ulDots = document.querySelector('.portfolio-dots');
         let currentSlide = 0,
             interval;
+        for (let i = 0; i < slide.length; i++) {
+            const dot = document.createElement("li");
+            if (i === 0) {
+                dot.classList.add("dot-active");
+            }
+            dot.classList.add("dot");
+            ulDots.append(dot);
+        }
+        const dot = document.querySelectorAll('.dot');
         const prevSlide = (elem, index, strClass) => {
             elem[index].classList.remove(strClass);
         };
