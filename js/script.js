@@ -23,6 +23,7 @@ class Todo {
     createItem(todo) {
         const li = document.createElement('li');
         li.classList.add('todo-item');
+        li.key = todo.key;
         li.insertAdjacentHTML('beforeend', `
             <span class="text-todo">${todo.value}</span>
             <div class="todo-buttons">
@@ -32,8 +33,10 @@ class Todo {
         `);
         if (todo.completed) {
             this.todoCompleted.append(li);
+            this.input.value = '';
         } else {
             this.todoList.append(li);
+            this.input.value = '';
         }
     }
 
@@ -47,6 +50,8 @@ class Todo {
             };
             this.todoData.set(newTodo.key, newTodo);
             this.render();
+        } else {
+            alert('Пустое дело добавить нельзя!');
         }
     }
 
@@ -54,8 +59,36 @@ class Todo {
         return Math.random(). toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
 
-    init() {
+    deleteItem(event) {
+        this.todoData.delete(event.closest('li').key);
+        this.render();
+    }
+
+    completedItem(event) {
+        if (!this.todoData.get(event.closest('li').key).completed) {
+            this.todoData.get(event.closest('li').key).completed = true;
+        } else {
+            this.todoData.get(event.closest('li').key).completed = false;
+        }
+        this.render();
+        //перебрать через forEach все эл-ты todoData и поменять с false на true тот, на который кликнули
+    }
+
+    handler() {
         this.form.addEventListener('submit', this.addTodo.bind(this));
+        const todoContainer = document.querySelector('.todo-container');
+        todoContainer.addEventListener('click', event => {
+            let target = event.target;
+            if (target.matches('.todo-remove')) {
+                this.deleteItem(target);
+            } else if (target.matches('.todo-complete')) {
+                this.completedItem(target);
+            }
+        });
+    }
+
+    init() {
+        this.handler();
         this.render();
     }
 }
