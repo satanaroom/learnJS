@@ -63,8 +63,8 @@ body {
     left: 0;
     z-index: 5;
 
-    background-color: steelblue;
-    box-shadow: 0 2px 4px rgba(44, 62, 80, 0.15);
+    background-color: rgb(48, 53, 65);
+    box-shadow: 0 2px 4px rgba(40, 110, 180, 0.15);
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
@@ -78,7 +78,7 @@ body {
     font-weight: 400;
     text-indent: 18px;
     padding: 0 60px 0 0;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(253, 247, 247, 0.2);
     border-radius: 5px 25px 25px 5px;
     border: 0;
     box-shadow: none;
@@ -213,12 +213,12 @@ body {
 }
 
 .todo:empty:after {
-    content: 'Нет задач';
+    content: 'Нет покупок';
     margin: 15px 0 0 0;
 }
 
 .todo-completed:empty:after {
-    content: 'Нет выполненых задач';
+    content: 'Нет добавленных товаров в корзину';
 }
 
 .todo:after,

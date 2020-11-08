@@ -71,7 +71,6 @@ class Todo {
             this.todoData.get(event.closest('li').key).completed = false;
         }
         this.render();
-        //перебрать через forEach все эл-ты todoData и поменять с false на true тот, на который кликнули
     }
 
     handler() {
