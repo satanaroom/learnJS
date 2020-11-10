@@ -227,10 +227,8 @@ window.addEventListener('DOMContentLoaded', () => {
     slider();
     //Our Team switch
     const switchTeam = () => {
-        let imgSrc;
         document.addEventListener('mouseover', event => {
             if (event.target.matches('.command__photo')) {
-                imgSrc = event.target.src;
                 event.target.src = event.target.dataset.img;
             }
         });
