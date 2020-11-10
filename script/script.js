@@ -241,4 +241,10 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
     switchTeam();
+    //Validation for culc
+    document.addEventListener('input', event => {
+        if (event.target.matches('.calc-item')) {
+            event.target.value = event.target.value.replace(/\D/gi, '');
+        }
+    });
 });
