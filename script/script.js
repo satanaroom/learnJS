@@ -1,11 +1,12 @@
 window.addEventListener('DOMContentLoaded', () => {
-    // eslint-disable-next-line strict
     'use strict';
+
     //Timer
     function countTimer(deadline) {
         const timerHours = document.querySelector('#timer-hours'),
             timerMinutes = document.querySelector('#timer-minutes'),
             timerSeconds = document.querySelector('#timer-seconds');
+
         function getTimeRemaining() {
             const dateStop = new Date(deadline).getTime(),
                 dateNow = new Date().getTime(),
@@ -24,6 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             return { timeRemaining, hours, minutes, seconds };
         }
+
         const updateClock = function() {
             const timer = getTimeRemaining();
             timerHours.textContent = timer.hours;
@@ -49,6 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const handlerMenu = () => {
             menu.classList.toggle('active-menu');
         };
+
         body.addEventListener('click', event => {
             let target1 = event.target;
             const target2 = event.target;
@@ -64,11 +67,13 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     toggleMenu();
     //popup
+
     const togglePopUp = () => {
         const popup = document.querySelector('.popup'),
             popupBtn = document.querySelectorAll('.popup-btn'),
             popupClose = document.querySelector('.popup-close'),
             popupContent = document.querySelector('.popup-content');
+
         popupBtn.forEach(elem => {
             elem.addEventListener('click', () => {
                 if (window.innerWidth > 768) {
@@ -87,6 +92,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+
         popupClose.addEventListener('click', () => {
             if (window.innerWidth > 768) {
                 let x = 1;
@@ -102,6 +108,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 popup.style.display = "none";
             }
         });
+
         popup.addEventListener('click', event => {
             let target = event.target;
             if (target.classList.contains('popup-close')) {
@@ -115,11 +122,13 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
     togglePopUp();
+
     //Tabs
     const tabs = () => {
         const tabHeader = document.querySelector('.service-header'),
             tab = tabHeader.querySelectorAll('.service-header-tab'),
             tabContent = document.querySelectorAll('.service-tab');
+
         const toggleTabContent = index => {
             for (let i = 0; i < tabContent.length; i++) {
                 if (index === i) {
@@ -131,6 +140,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             }
         };
+
         tabHeader.addEventListener('click', event => {
             let target = event.target;
             target = target.closest('.service-header-tab');
@@ -144,13 +154,16 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
     tabs();
+
     //Slider
     const slider = () => {
         const slide = document.querySelectorAll('.portfolio-item'),
             slider = document.querySelector('.portfolio-content'),
             ulDots = document.querySelector('.portfolio-dots');
+
         let currentSlide = 0,
             interval;
+
         for (let i = 0; i < slide.length; i++) {
             const dot = document.createElement("li");
             if (i === 0) {
@@ -159,13 +172,16 @@ window.addEventListener('DOMContentLoaded', () => {
             dot.classList.add("dot");
             ulDots.append(dot);
         }
+
         const dot = document.querySelectorAll('.dot');
         const prevSlide = (elem, index, strClass) => {
             elem[index].classList.remove(strClass);
         };
+
         const nextSlide = (elem, index, strClass) => {
             elem[index].classList.add(strClass);
         };
+
         const autoPlaySlide = () => {
             prevSlide(slide, currentSlide, 'portfolio-item-active');
             prevSlide(dot, currentSlide, 'dot-active');
@@ -176,12 +192,15 @@ window.addEventListener('DOMContentLoaded', () => {
             nextSlide(slide, currentSlide, 'portfolio-item-active');
             nextSlide(dot, currentSlide, 'dot-active');
         };
+
         const startSlider = (time = 3000) => {
             interval = setInterval(autoPlaySlide, time);
         };
+
         const stopSlider = () => {
             clearInterval(interval);
         };
+
         slider.addEventListener('click', event => {
             event.preventDefault();
             const target = event.target;
@@ -210,12 +229,14 @@ window.addEventListener('DOMContentLoaded', () => {
             nextSlide(slide, currentSlide, 'portfolio-item-active');
             nextSlide(dot, currentSlide, 'dot-active');
         });
+
         slider.addEventListener('mouseover', event => {
             if (event.target.matches('.portfolio-btn') ||
             event.target.matches('.dot')) {
                 stopSlider();
             }
         });
+
         slider.addEventListener('mouseout', event => {
             if (event.target.matches('.portfolio-btn') ||
             event.target.matches('.dot')) {
@@ -225,6 +246,7 @@ window.addEventListener('DOMContentLoaded', () => {
         startSlider(1500);
     };
     slider();
+
     //Our Team switch
     const switchTeam = () => {
         document.addEventListener('mouseover', event => {
@@ -232,6 +254,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 event.target.src = event.target.dataset.img;
             }
         });
+
         document.addEventListener('mouseout', event => {
             if (event.target.matches('.command__photo')) {
                 const datasetImg = event.target.dataset.img,
@@ -241,10 +264,57 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
     switchTeam();
-    //Validation for culc
-    document.addEventListener('input', event => {
-        if (event.target.matches('.calc-item')) {
-            event.target.value = event.target.value.replace(/\D/gi, '');
-        }
-    });
+
+    //Culc
+    const calc = (price = 100) => {
+        const calcBlock = document.querySelector('.calc-block'),
+            calcType = document.querySelector('.calc-type'),
+            calcSquare = document.querySelector('.calc-square'),
+            calcDay = document.querySelector('.calc-day'),
+            calcCount = document.querySelector('.calc-count'),
+            totalValue = document.getElementById('total');
+
+        const countSum = () => {
+            let total = 0,
+                countValue = 1,
+                dayValue = 1;
+            const typeValue = calcType.options[calcType.selectedIndex].value,
+                squareValue = +calcSquare.value;
+
+            if (calcCount.value > 1) {
+                countValue += (calcCount.value - 1) / 10;
+            }
+
+            if (calcDay.value && calcDay.value < 5) {
+                dayValue *= 2;
+            } else if (calcDay.value && calcDay.value < 10) {
+                dayValue *= 1.5;
+            }
+
+            if (typeValue && squareValue) {
+                total = price * typeValue * squareValue * countValue * dayValue;
+            }   
+
+            totalValue.textContent = total;
+        };
+
+        calcBlock.addEventListener('change', (event) => {
+            const target = event.target;
+
+            if (target.matches('.calc-type') || 
+            target.matches('.calc-square') || 
+            target.matches('.calc-day') || 
+            target.matches('.calc-count')) {
+                countSum();
+            }
+        });
+
+        //Validation for calc
+        document.addEventListener('input', event => {
+            if (event.target.matches('.calc-item')) {
+                event.target.value = event.target.value.replace(/\D/gi, '');
+            }
+        });
+    };
+    calc(100);
 });
