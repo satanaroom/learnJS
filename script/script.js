@@ -316,7 +316,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
         //Validation for calc
         document.addEventListener('input', event => {
-            if (event.target.matches('.calc-item')) {
+            if (event.target.matches('.calc-square') || 
+            event.target.matches('.calc-day') || 
+            event.target.matches('.calc-count')) {
                 event.target.value = event.target.value.replace(/\D/gi, '');
             }
         });
