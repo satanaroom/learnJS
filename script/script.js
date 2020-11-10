@@ -294,7 +294,12 @@ window.addEventListener('DOMContentLoaded', () => {
             if (typeValue && squareValue) {
                 total = price * typeValue * squareValue * countValue * dayValue;
             }   
-
+            // setInterval( () => {
+            //     totalValue.textContent = total;
+            //     if (total < total.value) { 
+            //         total++;
+            //     }
+            // }, 100);
             totalValue.textContent = total;
         };
 
