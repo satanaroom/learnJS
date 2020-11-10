@@ -225,4 +225,22 @@ window.addEventListener('DOMContentLoaded', () => {
         startSlider(1500);
     };
     slider();
+    //Our Team switch
+    const switchTeam = () => {
+        let imgSrc;
+        document.addEventListener('mouseover', event => {
+            if (event.target.matches('.command__photo')) {
+                imgSrc = event.target.src;
+                event.target.src = event.target.dataset.img;
+            }
+        });
+        document.addEventListener('mouseout', event => {
+            if (event.target.matches('.command__photo')) {
+                const datasetImg = event.target.dataset.img,
+                    originSrc = datasetImg.replace(/a(?=.jpg)/g, "");
+                event.target.src = originSrc;
+            }
+        });
+    };
+    switchTeam();
 });
