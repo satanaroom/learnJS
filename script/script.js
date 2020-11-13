@@ -417,6 +417,21 @@ window.addEventListener('DOMContentLoaded', () => {
             request.setRequestHeader('Content-Type', 'application/json');
 
             request.send(JSON.stringify(body));
+
+            document.querySelectorAll('.form-name').forEach((elem)=> {
+                elem.value = '';
+            });
+            document.querySelectorAll('.form-phone').forEach((elem)=> {
+                elem.value = '';
+            });
+            document.querySelectorAll('.form-email').forEach((elem)=> {
+                elem.value = '';
+            });
+            document.querySelectorAll('.top-form').forEach((elem)=> {
+                elem.value = '';
+            });
+            let messageInput = document.getElementById('form2-message');
+            messageInput.value = '';
         };
     };
     sendForm();
