@@ -324,4 +324,57 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
     calc(100);
+
+    //send-ajax-form
+
+    const sendForm = () => {
+        const errorMessage = 'Что-то пошло не так...',
+            loadMessage = 'Загрузка...',                  //начало выполнения усложненки
+            successMessage = 'Спасибо, мы скоро с Вами свяжемся!';
+
+        const form = document.getElementById('form1');
+
+        const statusMessage = document.createElement('div');
+        
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            form.appendChild(statusMessage); //Усложненка здесь! Здесь же можно добавить стили!
+            statusMessage.textContent = loadMessage;  //Продолжение усложненки!
+            const formData = new FormData(form);
+                let body = {};
+                for (let value of formData.entries()) {
+                    body[value[0]] = value[1];
+                }
+                // Альтернативный вариант
+                // formData.forEach((value, key) => {
+                //     body[key] = value;
+                // });
+            postData(body, () => {
+                statusMessage.textContent = successMessage;
+            }, (error) => {
+                statusMessage.textContent = errorMessage;
+                console.log(error);
+            });
+        });
+        const postData = (body, outputData, errorData) => {
+            const request = new XMLHttpRequest();
+
+            request.addEventListener('readystatechange', () => {
+                if (request.readyState !== 4) {
+                    return;
+                }
+                if (request.status === 200) {
+                    outputData();
+                } else {
+                    errorData(request.status);
+                }
+            });
+
+            request.open('POST', 'server.php');
+            request.setRequestHeader('Content-Type', 'application/json');
+
+            request.send(JSON.stringify(body));
+        };
+    };
+    sendForm();
 });
