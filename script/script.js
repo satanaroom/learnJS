@@ -328,29 +328,45 @@ window.addEventListener('DOMContentLoaded', () => {
     //send-ajax-form
 
     const sendForm = () => {
+        //Валидация номера телефона
+        document.addEventListener('input', event => {
+            if (event.target.matches('.form-phone')) {
+                event.target.value = event.target.value.replace(/[^+0-9]/gi, '');
+            }
+        });
+
         const errorMessage = 'Что-то пошло не так...',
             loadMessage = 'Загрузка...',                  //начало выполнения усложненки
             successMessage = 'Спасибо, мы скоро с Вами свяжемся!';
 
-        const form = document.getElementById('form1'),
+        const form1 = document.getElementById('form1'),
             form2 = document.getElementById('form2'),
             form3 = document.getElementById('form3');
 
         const statusMessage = document.createElement('div');
         
-        form.addEventListener('submit', (event) => {
+        document.addEventListener('submit', (event) => {
             event.preventDefault();
-            form.appendChild(statusMessage); //Усложненка здесь! Здесь же можно добавить стили!
-            statusMessage.textContent = loadMessage;  //Продолжение усложненки!
-            const formData = new FormData(form);
-                let body = {};
-                for (let value of formData.entries()) {
-                    body[value[0]] = value[1];
-                }
-                // Альтернативный вариант
-                // formData.forEach((value, key) => {
-                //     body[key] = value;
-                // });
+            let shell;
+            
+            if (event.target === form1) {
+                shell = form1;
+            } else if (event.target === form2) {
+                shell = form2;
+            } else if (event.target === form3) {
+                shell = form3;
+            }
+            shell.appendChild(statusMessage);
+                statusMessage.textContent = loadMessage;
+            const formData = new FormData(shell);
+            let body = {};
+            for (let value of formData.entries()) {
+                body[value[0]] = value[1];
+            }
+            // Альтернативный вариант
+            // formData.forEach((value, key) => {
+            //     body[key] = value;
+            // });
             postData(body, () => {
                 statusMessage.textContent = successMessage;
             }, (error) => {
@@ -358,47 +374,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 console.log(error);
             });
         });
-        form2.addEventListener('submit', (event) => {
-            event.preventDefault();
-            form2.appendChild(statusMessage); //Усложненка здесь! Здесь же можно добавить стили!
-            statusMessage.textContent = loadMessage;  //Продолжение усложненки!
-            const formData = new FormData(form2);
-                let body = {};
-                for (let value of formData.entries()) {
-                    body[value[0]] = value[1];
-                }
-                // Альтернативный вариант
-                // formData.forEach((value, key) => {
-                //     body[key] = value;
-                // });
-            postData(body, () => {
-                statusMessage.textContent = successMessage;
-            }, (error) => {
-                statusMessage.textContent = errorMessage;
-                console.log(error);
-            });
-        });
-        form3.addEventListener('submit', (event) => {
-            event.preventDefault();
-            form3.appendChild(statusMessage); //Усложненка здесь! Здесь же можно добавить стили!
-            statusMessage.textContent = loadMessage;  //Продолжение усложненки!
-            statusMessage.style.color = 'white';
-            const formData = new FormData(form3);
-                let body = {};
-                for (let value of formData.entries()) {
-                    body[value[0]] = value[1];
-                }
-                // Альтернативный вариант
-                // formData.forEach((value, key) => {
-                //     body[key] = value;
-                // });
-            postData(body, () => {
-                statusMessage.textContent = successMessage;
-            }, (error) => {
-                statusMessage.textContent = errorMessage;
-                console.log(error);
-            });
-        });
+
         const postData = (body, outputData, errorData) => {
             const request = new XMLHttpRequest();
 
