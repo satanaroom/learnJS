@@ -332,6 +332,10 @@ window.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('input', event => {
             if (event.target.matches('.form-phone')) {
                 event.target.value = event.target.value.replace(/[^+0-9]/gi, '');
+            } else if (event.target.matches('.form-name') || 
+            event.target.matches('#form2-name') || 
+            event.target.matches('#form2-message')) {
+                event.target.value = event.target.value.replace(/[^А-Яа-яЁе ]/gi, '');
             }
         });
 
@@ -363,16 +367,16 @@ window.addEventListener('DOMContentLoaded', () => {
             for (let value of formData.entries()) {
                 body[value[0]] = value[1];
             }
-            // Альтернативный вариант
-            // formData.forEach((value, key) => {
-            //     body[key] = value;
-            // });
             postData(body, () => {
                 statusMessage.textContent = successMessage;
             }, (error) => {
                 statusMessage.textContent = errorMessage;
                 console.log(error);
             });
+            // Альтернативный вариант
+            // formData.forEach((value, key) => {
+            //     body[key] = value;
+            // });
         });
 
         const postData = (body, outputData, errorData) => {
