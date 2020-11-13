@@ -340,8 +340,9 @@ window.addEventListener('DOMContentLoaded', () => {
         });
 
         const errorMessage = 'Что-то пошло не так...',
-            loadMessage = 'Загрузка...',                  //начало выполнения усложненки
             successMessage = 'Спасибо, мы скоро с Вами свяжемся!';
+
+        let loadMessage = `<div class="loadMessage"></div>`;
 
         const form1 = document.getElementById('form1'),
             form2 = document.getElementById('form2'),
@@ -361,7 +362,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 shell = form3;
             }
             shell.appendChild(statusMessage);
-                statusMessage.textContent = loadMessage;
+                statusMessage.innerHTML = loadMessage;
             const formData = new FormData(shell);
             let body = {};
             for (let value of formData.entries()) {
