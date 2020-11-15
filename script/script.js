@@ -325,20 +325,58 @@ window.addEventListener('DOMContentLoaded', () => {
     };
     calc(100);
 
-    const valid = new Validator ({      //создание валидатора внутри основного скрипта
+    const valid1 = new Validator ({      //создание валидатора внутри основного скрипта
         selector: '#form1',
         pattern: {},
         method: {
-            'phone': [
+            'form1-phone': [
                 ['notEmpty'],            //проверяет пустое поле или нет
                 ['pattern', 'phone']
             ],
-            'email': [
+            'form1-email': [
                 ['notEmpty'],            //проверяет пустое поле или нет
                 ['pattern', 'email']
             ]
         }
     });
 
-    valid.init();                       //инициальзация валидатора
+    valid1.init();                       //инициальзация валидатора
+
+    const valid2 = new Validator ({      //создание валидатора внутри основного скрипта
+        selector: '#form2',
+        pattern: {},
+        method: {
+            'form1-phone': [
+                ['notEmpty'],            //проверяет пустое поле или нет
+                ['pattern', 'phone']
+            ],
+            'form1-email': [
+                ['notEmpty'],            //проверяет пустое поле или нет
+                ['pattern', 'email']
+            ],
+            'form2-message': [
+                ['notEmpty'],            //проверяет пустое поле или нет
+                ['pattern', 'email']
+            ]
+        }
+    });
+
+    valid2.init(); 
+
+    const valid3 = new Validator ({      //создание валидатора внутри основного скрипта
+        selector: '#form3',
+        pattern: {},
+        method: {
+            'form1-phone': [
+                ['notEmpty'],            //проверяет пустое поле или нет
+                ['pattern', 'phone']
+            ],
+            'form1-email': [
+                ['notEmpty'],            //проверяет пустое поле или нет
+                ['pattern', 'email']
+            ]
+        }
+    });
+
+    valid3.init();                       //инициальзация валидатора
 });

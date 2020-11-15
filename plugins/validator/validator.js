@@ -43,7 +43,7 @@ class Validator {
             const method = this.method[elem.id];
         
             if (method) {
-                return method.every( item => validatorMethod[item[0]](elem, this.pattern[item[1]]));
+                return method.every(item => validatorMethod[item[0]](elem, this.pattern[item[1]]));
             }
         } else {
             console.warn('Необходимо передать id полей ввода и методы проверки этих полей!');
@@ -52,10 +52,6 @@ class Validator {
         return true;
     }
         
-        
-        
-    
-
     //функция для самой валидации.  
     //Если инпут прошел проверку - вызов showSuccess,
     //Если не прошел - showError.
@@ -96,10 +92,10 @@ class Validator {
         const style = document.createElement('style');
         style.textContent = `
             input.success {
-                border: 2px solid green
+                border: 2px solid green !important
             }
             input.error {
-                border: 2px solid red
+                border: 2px solid red !important
             }
             validator-error {
                 fonst-size: 12px;
