@@ -324,4 +324,21 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     };
     calc(100);
+
+    const valid = new Validator ({      //создание валидатора внутри основного скрипта
+        selector: '#form1',
+        pattern: {},
+        method: {
+            'phone': [
+                ['notEmpty'],            //проверяет пустое поле или нет
+                ['pattern', 'phone']
+            ],
+            'email': [
+                ['notEmpty'],            //проверяет пустое поле или нет
+                ['pattern', 'email']
+            ]
+        }
+    });
+
+    valid.init();                       //инициальзация валидатора
 });
