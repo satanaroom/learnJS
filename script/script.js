@@ -362,7 +362,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 shell = form3;
             }
             shell.appendChild(statusMessage);
+                statusMessage.style.color = `white`;
                 statusMessage.innerHTML = loadMessage;
+            const removeStatusMessage = () => {
+                statusMessage.remove();
+            };
+                setTimeout(removeStatusMessage, 7000);
             const formData = new FormData(shell);
             let body = {};
             for (let value of formData.entries()) {
