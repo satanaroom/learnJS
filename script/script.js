@@ -374,7 +374,7 @@ window.addEventListener('DOMContentLoaded', () => {
             //     statusMessage.textContent = errorMessage;
             //     console.log(error);
             // });
-            postData('./server.php', body)
+            postData(body)
                 .then(() => {
                     statusMessage.textContent = successMessage;
                 })
@@ -389,7 +389,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // });
         });
 
-        const postData = (url, body) => {
+        const postData = (body) => {
             return new Promise((resolve, reject) => {
                 const request = new XMLHttpRequest();
 
@@ -398,17 +398,16 @@ window.addEventListener('DOMContentLoaded', () => {
                         return;
                     }
                     if (request.status === 200) {
-                        const response = JSON.stringify(body);
-                        resolve(response);
+                        resolve();
                     } else {
                         reject(request.status);
                     }
                 });
-                request.open('POST', url);
+                request.open('POST', './server.php');
 
                 request.setRequestHeader('Content-Type', 'application/json');
 
-                request.send();
+                request.send(JSON.stringify(body));
 
                 document.querySelectorAll('.form-name').forEach((elem)=> {
                     elem.value = '';
