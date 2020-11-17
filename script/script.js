@@ -333,9 +333,10 @@ window.addEventListener('DOMContentLoaded', () => {
             if (event.target.matches('.form-phone')) {
                 event.target.value = event.target.value.replace(/[^+0-9]/gi, '');
             } else if (event.target.matches('.form-name') || 
-            event.target.matches('#form2-name') || 
-            event.target.matches('#form2-message')) {
+            event.target.matches('#form2-name')) {
                 event.target.value = event.target.value.replace(/[^А-Яа-яЁе ]/gi, '');
+            } else if (event.target.matches('#form2-message')) {
+                event.target.value = event.target.value.replace(/[^А-Яа-яЁе \,\.\!\?]/gi, '');
             }
         });
 
@@ -373,62 +374,44 @@ window.addEventListener('DOMContentLoaded', () => {
             for (let value of formData.entries()) {
                 body[value[0]] = value[1];
             }
-            // postData(body, () => {
-            //     statusMessage.textContent = successMessage;
-            // }, (error) => {
-            //     statusMessage.textContent = errorMessage;
-            //     console.log(error);
-            // });
+
             postData(body)
-                .then(() => {
+                .then((response) => {
+                    if (response.status !== 200) {
+                        throw new Error('status network not 200');
+                    }
                     statusMessage.textContent = successMessage;
                 })
                 .catch(error => {
                     statusMessage.textContent = errorMessage;
                     console.log(error);
+                })
+                .then(() => {
+                    document.querySelectorAll('.form-name').forEach((elem)=> {
+                        elem.value = '';
+                    });
+                    document.querySelectorAll('.form-phone').forEach((elem)=> {
+                        elem.value = '';
+                    });
+                    document.querySelectorAll('.form-email').forEach((elem)=> {
+                        elem.value = '';
+                    });
+                    document.querySelectorAll('.top-form').forEach((elem)=> {
+                        elem.value = '';
+                    });
+                    let messageInput = document.getElementById('form2-message');
+                    messageInput.value = '';
                 });
-            
-            // Альтернативный вариант
-            // formData.forEach((value, key) => {
-            //     body[key] = value;
-            // });
         });
 
         const postData = (body) => {
-            return new Promise((resolve, reject) => {
-                const request = new XMLHttpRequest();
-
-                request.addEventListener('readystatechange', () => {
-                    if (request.readyState !== 4) {
-                        return;
-                    }
-                    if (request.status === 200) {
-                        resolve();
-                    } else {
-                        reject(request.status);
-                    }
-                });
-                request.open('POST', './server.php');
-
-                request.setRequestHeader('Content-Type', 'application/json');
-
-                request.send(JSON.stringify(body));
-
-                document.querySelectorAll('.form-name').forEach((elem)=> {
-                    elem.value = '';
-                });
-                document.querySelectorAll('.form-phone').forEach((elem)=> {
-                    elem.value = '';
-                });
-                document.querySelectorAll('.form-email').forEach((elem)=> {
-                    elem.value = '';
-                });
-                document.querySelectorAll('.top-form').forEach((elem)=> {
-                    elem.value = '';
-                });
-                let messageInput = document.getElementById('form2-message');
-                messageInput.value = '';
-            });
+            return fetch('./server.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });     
         };
     };
     sendForm();
