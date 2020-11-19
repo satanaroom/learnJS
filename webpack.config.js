@@ -2,12 +2,12 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        name: './src/index.js'
+        main: './src/index.js'
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'main.js',
-        publicPath: 'dist/'
+        path: path.resolve(__dirname, './dist'),
+        filename: '[name].js',
+        publicPath: '/dist'
     },
     devServer: {
         overlay: true
