@@ -3,7 +3,14 @@ const sendForm = () => {
     //Валидация номера телефона
     document.addEventListener('input', event => {
         if (event.target.matches('.form-phone')) {
-            event.target.value = event.target.value.replace(/[^+0-9]/gi, '');
+            event.target.value = event.target.value.replace(/^[\+]?[0-9]{1}[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{17}$/im, '');
+            document.addEventListener('change', event => {
+                if (event.target.matches('.form-phone')) {
+                    if (event.target.value.length < 5) {
+                        event.target.value = '';
+                    } 
+                }
+            });
         } else if (event.target.matches('.form-name') || 
         event.target.matches('#form2-name')) {
             event.target.value = event.target.value.replace(/[^А-Яа-яЁе ]/gi, '');

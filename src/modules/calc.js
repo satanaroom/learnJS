@@ -15,13 +15,13 @@ const calc = (price = 100) => {
             squareValue = +calcSquare.value;
 
         if (calcCount.value > 1) {
-            countValue += (calcCount.value - 1) / 10;
+            countValue = Math.floor(countValue + (calcCount.value - 1) / 10);
         }
 
         if (calcDay.value && calcDay.value < 5) {
-            dayValue *= 2;
+            dayValue = Math.floor(dayValue * 2);
         } else if (calcDay.value && calcDay.value < 10) {
-            dayValue *= 1.5;
+            dayValue = Math.floor(dayValue * 1.5);
         }
 
         if (typeValue && squareValue) {
