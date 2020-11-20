@@ -27,6 +27,15 @@ const togglePopUp = () => {
     popupClose.addEventListener('click', () => {
         if (window.innerWidth > 768) {
             let x = 1;
+            document.querySelectorAll('.form-name').forEach((elem)=> {
+                elem.value = '';
+            });
+            document.querySelectorAll('.form-phone').forEach((elem)=> {
+                elem.value = '';
+            });
+            document.querySelectorAll('.form-email').forEach((elem)=> {
+                elem.value = '';
+            });
             const timer = setInterval(() => {
                 x -= 0.1;
                 popupContent.style.opacity = `${x}`;
@@ -48,6 +57,15 @@ const togglePopUp = () => {
             target = target.closest('.popup-content');
             if (!target) {
                 popup.style.display = "none";
+                document.querySelectorAll('.form-name').forEach((elem)=> {
+                    elem.value = '';
+                });
+                document.querySelectorAll('.form-phone').forEach((elem)=> {
+                    elem.value = '';
+                });
+                document.querySelectorAll('.form-email').forEach((elem)=> {
+                    elem.value = '';
+                });
             }
         }
     });
