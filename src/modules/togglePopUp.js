@@ -7,7 +7,7 @@ const togglePopUp = () => {
 
     popupBtn.forEach(elem => {
         elem.addEventListener('click', () => {
-            if (window.innerWidth > 768) {
+            if (window.innerWidth >= 768) {
                 popup.style.display = "block";
                 popupContent.style.opacity = "0";
                 let x = 0;
